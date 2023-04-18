@@ -1,4 +1,5 @@
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { toast,Toast, ToastContainer } from "react-toastify";
@@ -91,9 +92,15 @@ export default function Dashboard(){
                   <p className="text-gray-600">Date of Birth: January 1, 1980</p>
                   <p className="text-gray-600">Gender: Male</p>
                 </div> */}
-                <a href="#" className="mt-6 text-indigo-500 hover:text-indigo-600">
+                {/* <a href="#" className="mt-6 text-indigo-500 hover:text-indigo-600">
                   Edit Profile
-                </a>
+                </a> */}
+                <Link href="/editprofile" className="p-2 font-bold font-sans border-b-2 border-double 
+            border-transparent hover:border-current cursor-pointer select-none text-slate-500">
+                    
+                    Edit Profile
+                    
+                </Link>
                 <button
       className="bg-red-500 hover:bg-red-600 ml-5 text-white font-semibold py-2 px-4 rounded"
       onClick={handleLogout}
