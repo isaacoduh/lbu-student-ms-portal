@@ -9,10 +9,27 @@ import 'react-toastify/dist/ReactToastify.css'
 
 export default function Dashboard(){
     const [user, setUser] = useState('');
+    const [myCourses, setMyCourses] = useState([]);
     const router = useRouter();
     useEffect(() => {
         const token = localStorage.getItem('token')
         console.log(token);
+
+        const fetchMyCourses = async() => {
+            try {
+                const response = await axios.get(`http://127.0.0.1:8070/api/v1/student/enrollments`, {
+                    headers: {
+                        'content-type': 'application/json',
+                        Authorization: 'Bearer ' + token
+                    }
+                });
+                console.log(response);
+                setMyCourses(response.data.courses);
+                console.log(response.data.courses);
+            } catch (error) {
+                console.log(error);   
+            }
+        }
 
         axios.get(`http://127.0.0.1:8070/api/v1/student/profile`,{
             headers: {
@@ -41,7 +58,8 @@ export default function Dashboard(){
                 localStorage.setItem('token', '')
               router.push('/login')
             }
-        })
+        });
+        fetchMyCourses();
     },[])
 
     const handleLogout = () => {
@@ -75,6 +93,12 @@ export default function Dashboard(){
                   <div>
                     <h3 className="text-xl text-gray-700 font-semibold">{user.firstName} {user.lastName}</h3>
                     <p className="text-gray-600">{user.email}</p>
+                    <p className="text-gray-400">Graduation Status: <span
+      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-500 text-white"
+    >
+      {/* Generate status of graduation here! */}
+      Eligible
+    </span></p>
                   </div>
                 </div>
                 <div className="border-t border-gray-300 pt-4">
@@ -108,6 +132,38 @@ export default function Dashboard(){
       Logout
     </button>
 
+              </div>
+              <div className="bg-white p-6 rounded-md shadow-md">
+                <h2 className="text-lg font-semibold mb-4 text-slate-500">Course Information</h2>
+                <Link href="/viewcourses" className="p-2 font-bold font-sans border-b-2 border-double 
+            border-transparent hover:border-current cursor-pointer select-none text-slate-500">
+                    
+                    View All Available Courses
+                    
+                </Link>
+                <hr />
+                <div>
+                    {myCourses.length > 0 ? (
+                        <table className="w-full border-collapse border border-gray-300">
+                            <thead>
+                                <tr className="bg-gray-900 text-white">
+                                    <td className="text-center">Course Code</td>
+                                    <th className="text-center">Course Title</th>
+                                    <th className="text-center">Course Term</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {myCourses.map((course,index) => (
+                                    <tr key={index} className="text-gray-900">
+                                        <td className="p-4">{course.courseId}</td>
+                                        <td className="p-4">{course.courseTitle}</td>
+                                        <td className="p-4">{course.courseTerm}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    ):(<p className="text-gray-500">No courses enrolled yet!</p>)}
+                </div>
               </div>
               {/* Other dashboard sections */}
             </div>
