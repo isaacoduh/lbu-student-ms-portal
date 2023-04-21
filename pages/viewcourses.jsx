@@ -125,6 +125,7 @@ const ViewCourses = () => {
                 <th className="px-4 py-2">Course ID</th>
                 <th className="px-4 py-2">Course Title</th>
                 <th className="px-4 py-2">Course Term</th>
+                <th className="px-4 py-2">Course Fee</th>
                 <th className="px-4 py-2">Enroll</th>
             </tr>
         </thead>
@@ -135,6 +136,7 @@ const ViewCourses = () => {
                     <td className="px-4 py-2">{course.courseId}</td>
                     <td className="px-4 py-2">{course.courseTitle}</td>
                     <td className="px-4 py-2">{course.courseTerm}</td>
+                    <td className="px-4 py-2">{course.courseFee}</td>
                     <td className="px-4 py-2">
                         <button
                             className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded btn-xs"
