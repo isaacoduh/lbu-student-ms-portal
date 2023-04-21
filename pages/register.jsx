@@ -11,14 +11,12 @@ export default function Register() {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [studentId, setStudentId] = useState('');
 
     const router = useRouter();
 
     function register(event){
         event.preventDefault();
         axios.post(`http://127.0.0.1:8070/api/v1/auth/register`,{
-            studentId: studentId,
             firstName: firstName,
             lastName: lastName,
             email,
@@ -50,12 +48,12 @@ export default function Register() {
                 <ToastContainer/>
                 <form onSubmit={register}
           className="bg-white px-1 py-1 rounded-xl text-black w-full">
-            <div className="mb-4">
+            {/* <div className="mb-4">
                             <label className="block text-gray-600 text-sm mb-2">Student ID</label>
                             <input type="text" id="studentId" name="studentId"
                                 className="w-full px-3 py-2 placeholder-gray-400 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
                                 placeholder="" required onChange={e => setStudentId(e.target.value)} />
-                        </div>
+                        </div> */}
                     <div className="mb-4">
                         <label  className="block text-gray-600 text-sm mb-2">First Name</label>
                         <input
