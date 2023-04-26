@@ -5,15 +5,43 @@ import { useState, useEffect } from "react";
 import { toast,Toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 
-
+const Badge = ({ hasOutstandingBalance }) => {
+    return (<span className={`text-500`}>{hasOutstandingBalance === true ? 'Ineligible' : 'Eligible'}</span>);
+    // const badgeClasses = status
+    //   ? 'bg-green-500 text-white'
+    //   : 'bg-red-500 text-white'; // Define the badge classes based on the boolean status
+  
+    // return (
+    //   <span className={`inline-block py-1 px-3 rounded-full text-sm ${badgeClasses}`}>
+    //     {status ? 'Eligible' : 'Ineligibile'}
+    //   </span>
+    // );
+  };
 
 export default function Dashboard(){
     const [user, setUser] = useState('');
     const [myCourses, setMyCourses] = useState([]);
+    const [hasOutstandingBalance, setHasOutstandingBalance] = useState(false);
     const router = useRouter();
     useEffect(() => {
         const token = localStorage.getItem('token')
         console.log(token);
+
+        const fetchMyGraduationStatus = async () => {
+            try {
+                const response = await axios.get(`http://127.0.0.1:8070/api/v1/student/status`, {
+                    headers: {
+                        'content-type': 'application/json',
+                        Authorization: 'Bearer ' + token
+                    }
+                });
+
+                
+                setHasOutstandingBalance(response.data);
+            } catch (error) {
+                
+            }
+        }
 
         const fetchMyCourses = async() => {
             try {
@@ -60,6 +88,7 @@ export default function Dashboard(){
             }
         });
         fetchMyCourses();
+        fetchMyGraduationStatus();
     },[])
 
     const handleLogout = () => {
@@ -93,12 +122,7 @@ export default function Dashboard(){
                   <div>
                     <h3 className="text-xl text-gray-700 font-semibold">{user.firstName} {user.lastName}</h3>
                     <p className="text-gray-600">{user.email}</p>
-                    <p className="text-gray-400">Graduation Status: <span
-      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-500 text-white"
-    >
-      {/* Generate status of graduation here! */}
-      Eligible
-    </span></p>
+                    <p className="text-gray-400">Graduation Status: <Badge hasOutstandingBalance={hasOutstandingBalance}/></p>
                   </div>
                 </div>
                 <div className="border-t border-gray-300 pt-4">
