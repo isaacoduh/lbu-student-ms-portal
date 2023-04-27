@@ -21,7 +21,7 @@ export default function login(){
         console.log(email);
         console.log(password);
 
-        axios.post(`http://127.0.0.1:8070/api/v1/auth/login`,{
+        axios.post(`http://127.0.0.1:4100/api/v1/auth/login`,{
             email: email,
             password:password
         }).then((response) => {

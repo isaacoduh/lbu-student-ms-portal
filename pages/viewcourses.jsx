@@ -25,7 +25,7 @@ const ViewCourses = () => {
         const token = localStorage.getItem('token')
         console.log(token);
 
-        axios.get(`http://127.0.0.1:8070/api/v1/courses`,{
+        axios.get(`http://127.0.0.1:4100/api/v1/courses`,{
             headers: {
                 'content-type': 'application/json',
                 Authorization: `Bearer ${token}`
@@ -75,7 +75,7 @@ const ViewCourses = () => {
     // localhost:8070/api/v1/student/enroll/6
     const token = localStorage.getItem('token');
     console.log(token)
-    await axios.post(`http://127.0.0.1:8070/api/v1/student/enroll`,{
+    await axios.post(`http://127.0.0.1:4100/api/v1/student/enroll`,{
         id: courseId
     }, {
         headers: {

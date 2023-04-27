@@ -16,7 +16,7 @@ export default function Register() {
 
     function register(event){
         event.preventDefault();
-        axios.post(`http://127.0.0.1:8070/api/v1/auth/register`,{
+        axios.post(`http://127.0.0.1:4100/api/v1/auth/register`,{
             firstName: firstName,
             lastName: lastName,
             email,

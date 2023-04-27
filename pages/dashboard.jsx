@@ -29,7 +29,7 @@ export default function Dashboard(){
 
         const fetchMyGraduationStatus = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8070/api/v1/student/status`, {
+                const response = await axios.get(`http://127.0.0.1:4100/api/v1/student/status`, {
                     headers: {
                         'content-type': 'application/json',
                         Authorization: 'Bearer ' + token
@@ -45,7 +45,7 @@ export default function Dashboard(){
 
         const fetchMyCourses = async() => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8070/api/v1/student/enrollments`, {
+                const response = await axios.get(`http://127.0.0.1:4100/api/v1/student/enrollments`, {
                     headers: {
                         'content-type': 'application/json',
                         Authorization: 'Bearer ' + token
@@ -59,7 +59,7 @@ export default function Dashboard(){
             }
         }
 
-        axios.get(`http://127.0.0.1:8070/api/v1/student/profile`,{
+        axios.get(`http://127.0.0.1:4100/api/v1/student/profile`,{
             headers: {
                 'content-type': 'application/json',
                 Authorization: 'Bearer ' + token
