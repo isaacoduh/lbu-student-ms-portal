@@ -25,7 +25,7 @@ export default function EditProfile(){
         const token = localStorage.getItem('token')
         console.log(token);
         console.log('Form Data:', formData);
-        axios.put(`http://127.0.0.1:8070/api/v1/student/profile/update`, formData, {
+        axios.put(`http://127.0.0.1:4100/api/v1/student/profile/update`, formData, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -51,7 +51,7 @@ export default function EditProfile(){
         const token = localStorage.getItem('token')
         console.log(token);
         console.log('loaded!')
-        axios.get(`http://127.0.0.1:8070/api/v1/student/profile`,{
+        axios.get(`http://127.0.0.1:4100/api/v1/student/profile`,{
             headers: {
                 'content-type': 'application/json',
                 Authorization: 'Bearer ' + token
